@@ -35,22 +35,22 @@ int main() {
 
     if (!gpio_get(BTN_PIN)) { 
       gpio_put(LED_PIN_1, 1);
-      sleep_ms(20);
+      sleep_ms(100);
       gpio_put(LED_PIN_1, 0); 
       sleep_ms(300);
       
       gpio_put(LED_PIN_2, 1);
-      sleep_ms(20);
+      sleep_ms(100);
       gpio_put(LED_PIN_2, 0); 
       sleep_ms(300);
       
       gpio_put(LED_PIN_3, 1);
-      sleep_ms(20);
+      sleep_ms(100);
       gpio_put(LED_PIN_3, 0); 
       sleep_ms(300);
       
       gpio_put(LED_PIN_4, 1);
-      sleep_ms(20);
+      sleep_ms(100);
       gpio_put(LED_PIN_4, 0); 
       sleep_ms(300); 
 
