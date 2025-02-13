@@ -2,15 +2,26 @@
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 
-const int BTN_PIN = 26;
+const int BTN_PIN_1 = 26;
 const int BTN_PIN_2 = 7;
+
+bool debounce(int btn) {
+    if (!gpio_get(btn)) {  
+        sleep_ms(50);      
+        if (!gpio_get(btn)) {  
+            while (!gpio_get(btn));  
+            return true;
+        }
+    }
+    return false;
+}
 
 int main() {
     stdio_init_all();
 
-    gpio_init(BTN_PIN);
-    gpio_set_dir(BTN_PIN, GPIO_IN);
-    gpio_pull_up(BTN_PIN);
+    gpio_init(BTN_PIN_1);
+    gpio_set_dir(BTN_PIN_1, GPIO_IN);
+    gpio_pull_up(BTN_PIN_1);
 
     gpio_init(BTN_PIN_2);
     gpio_set_dir(BTN_PIN_2, GPIO_IN);
@@ -20,11 +31,11 @@ int main() {
 
     while (true) {
 
-        if (!gpio_get(BTN_PIN)) {
+        if (debounce(BTN_PIN_1)) {
             printf("Botao 1: %d\n", cnt_1++);
         }
 
-        if (!gpio_get(BTN_PIN_2)) {
+        if (debounce(BTN_PIN_2)) {
             printf("Botao 2: %d\n", cnt_2++);
         }
     }
